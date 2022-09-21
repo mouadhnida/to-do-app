@@ -1,6 +1,6 @@
 const Task = require('../models/Task');
 const asyncWrapper = require('../middleware/async');
-const { createCustomError } = require('../error/custom-error');
+const {  createCustomError } = require('../error/custom-error');
 
 
 const getAllTasks = asyncWrapper(async (req, res) => {
@@ -28,8 +28,8 @@ const updateTask = asyncWrapper(async (req, res, next) => {
 
 const deleteTask = asyncWrapper(async (req, res, next) => {
         const { id } = req.params;
-        const deleteTask  = await Task.findOneAndDelete({ _id: id })  
-        if(!deleteTak) {
+        const task  = await Task.findOneAndDelete({ _id: id })  
+        if(!task) {
             return next(createCustomError(`No task with id: ${id}`,404))
         }res.status(200).json({msg : `Task with id: ${id} is deleted`})
 });
